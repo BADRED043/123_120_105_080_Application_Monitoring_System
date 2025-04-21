@@ -1,0 +1,83 @@
+version: "3.8"
+
+services:
+  zookeeper:
+    image: confluentinc/cp-zookeeper:latest
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+
+  kafka:
+    image: confluentinc/cp-kafka:latest
+    depends_on:
+      - zookeeper
+    environment:
+      KAFKA_BROKER_ID: 1
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092
+      KAFKA_LISTENERS: PLAINTEXT://0.0.0.0:9092
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+    healthcheck:
+      test: ["CMD", "kafka-topics", "--bootstrap-server", "localhost:9092", "--list"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
+  producer:
+    image: python:3.9
+    depends_on:
+      kafka:
+        condition: service_healthy
+      json-server:
+        condition: service_started
+    volumes:
+      - .:/app
+    working_dir: /app
+    command: >
+      bash -c "pip install requests kafka-python && python kafka_producer.py"
+
+  consumer:
+    image: python:3.9
+    container_name: consumer
+    depends_on:
+      kafka:
+        condition: service_healthy
+    volumes:
+      - .:/app
+    working_dir: /app
+    command: >
+      bash -c "pip install requests kafka-python && python kafka_consumer.py"
+    logging:
+      driver: "json-file"
+
+  json-server:
+    build: .
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./db.json:/data/db.json
+
+  loki:
+    image: grafana/loki:latest
+    container_name: loki
+    ports:
+      - "3100:3100"
+    volumes:
+      - ./loki-config.yaml:/etc/loki/config.yaml
+    command: -config.file=/etc/loki/config.yaml
+
+  grafana:
+    image: grafana/grafana:latest
+    container_name: grafana
+    depends_on:
+      - loki
+    environment:
+      GF_SECURITY_ADMIN_PASSWORD: "admin"
+    ports:
+      - "3000:3000"
+    volumes:
+      - grafana-data:/var/lib/grafana
+    links:
+      - loki
+
+volumes:
+  grafana-data:

@@ -1,0 +1,42 @@
+{
+  "chatbot_logs": [
+    {"timestamp": "2025-03-30T12:02:00Z", "event": "User message", "text": "What's the weather like today?"},
+    {"timestamp": "2025-03-30T12:07:30Z", "event": "Bot response", "text": "The weather is sunny with a high of 70°F."},
+    {"timestamp": "2025-03-30T12:15:10Z", "event": "User message", "text": "Tell me a joke!"},
+    {"timestamp": "2025-03-30T12:23:45Z", "event": "Bot response", "text": "Why don’t skeletons fight each other? They don’t have the guts."},
+    {"timestamp": "2025-03-30T12:34:00Z", "event": "User message", "text": "Who won the last World Cup?"},
+    {"timestamp": "2025-03-30T12:42:30Z", "event": "Bot response", "text": "France won the last World Cup in 2018."}
+  ],
+  "sentiment_analysis": [
+    {"timestamp": "2025-03-30T12:03:30Z", "text": "I’m feeling great today!", "sentiment": "positive"},
+    {"timestamp": "2025-03-30T12:10:00Z", "text": "This is frustrating!", "sentiment": "negative"},
+    {"timestamp": "2025-03-30T12:17:00Z", "text": "I’m so happy!", "sentiment": "positive"},
+    {"timestamp": "2025-03-30T12:23:00Z", "text": "I can’t take this anymore.", "sentiment": "negative"},
+    {"timestamp": "2025-03-30T12:28:45Z", "text": "Feeling on top of the world!", "sentiment": "positive"},
+    {"timestamp": "2025-03-30T12:35:00Z", "text": "I’m exhausted.", "sentiment": "negative"}
+  ],
+  "chatbot_analytics": [
+    {"timestamp": "2025-03-30T12:01:30Z", "total_messages": 50, "unique_users": 12},
+    {"timestamp": "2025-03-30T12:10:10Z", "total_messages": 60, "unique_users": 15},
+    {"timestamp": "2025-03-30T12:20:30Z", "total_messages": 80, "unique_users": 20},
+    {"timestamp": "2025-03-30T12:30:00Z", "total_messages": 100, "unique_users": 30},
+    {"timestamp": "2025-03-30T12:37:10Z", "total_messages": 120, "unique_users": 35},
+    {"timestamp": "2025-03-30T12:45:00Z", "total_messages": 140, "unique_users": 40}
+  ],
+  "error_logs": [
+    {"timestamp": "2025-03-30T12:05:15Z", "error": "Timeout error during API call"},
+    {"timestamp": "2025-03-30T12:09:00Z", "error": "Invalid API response format"},
+    {"timestamp": "2025-03-30T12:12:45Z", "error": "Database connection failed"},
+    {"timestamp": "2025-03-30T12:18:20Z", "error": "User session expired"},
+    {"timestamp": "2025-03-30T12:22:30Z", "error": "Rate limit exceeded"},
+    {"timestamp": "2025-03-30T12:27:50Z", "error": "Failed to connect to server"}
+  ],
+  "user_activity": [
+    {"timestamp": "2025-03-30T12:00:00Z", "user_id": "12345", "action": "Login"},
+    {"timestamp": "2025-03-30T12:05:30Z", "user_id": "67890", "action": "Logout"},
+    {"timestamp": "2025-03-30T12:13:00Z", "user_id": "11111", "action": "Login"},
+    {"timestamp": "2025-03-30T12:19:20Z", "user_id": "12345", "action": "Logout"},
+    {"timestamp": "2025-03-30T12:24:30Z", "user_id": "54321", "action": "Login"},
+    {"timestamp": "2025-03-30T12:29:00Z", "user_id": "67890", "action": "Logout"}
+  ]
+}
